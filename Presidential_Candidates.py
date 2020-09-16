@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+"""
+    File name: Presidential_Candidates.py
+    Author: Elijah Cox
+    Date created: 4/12/2019
+"""
+
 import os
 
 import re
