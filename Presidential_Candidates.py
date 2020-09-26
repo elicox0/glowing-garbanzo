@@ -52,14 +52,12 @@ def create_corpus(site, corpus_folder=Corpus_dir):
   # Find the links by getting the href= attribute on each tag and append them to a list
   links = [tag.get('href') for tag in tags if tag.get('href') != None and 'http' in tag.get('href')] #Optional condition to filter links
   for i, link in enumerate(links):
-    #if i < 10: #Change this condition; it should have to do with the length of the text string
     webpage = requests.get(link)
     soup = bs(webpage.text, "html.parser")
     paragraphs = soup.find_all('p')
     if len(paragraphs) > 2:
       # Write the text from the link to a file with the appropriate name
       with open(f'link_{i}.txt', mode = 'w') as fout:
-        #fout.write(soup.get_text())
         fout.write(urllib.parse.urlparse(site).netloc + '\n')    
         for i in paragraphs:        
           fout.write(i.get_text() + '\n')
@@ -95,9 +93,7 @@ def topic_model(corpus_loc, n_topics = 10, destination = None,candidate_n=None):
   columns = [[]]*len(output)
   for i in range(len(output)):
     columns[i] = re.findall(r'\"\w+\"', output[i][1])
-    columns[i].insert(0,i+1)
-  # for k in columns:
-  #   print(k)                                                           
+    columns[i].insert(0,i+1)                                                          
   
   # Export the results to a .csv file
   if destination != None:
